@@ -373,14 +373,18 @@ body {
     z-index: 1;
     text-align: center;
     padding: 60px 20px;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .hero__title {
-    font-size: clamp(40px, 7vw, 72px);
+    font-size: clamp(32px, 6vw, 72px);
     font-weight: 900;
-    line-height: 1.1;
+    line-height: 1.15;
     margin-bottom: 32px;
     animation: fadeInUp 0.8s ease-out;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .hero__description {
@@ -1551,6 +1555,8 @@ body {
     .nav__menu { top: 72px; margin: 0 10px; width: calc(100% - 20px); }
     .nav__menu.active { left: 10px; }
 
+    .hero__title { font-size: 28px; line-height: 1.2; }
+    .hero__description { font-size: 14px; }
     .btn { padding: 12px 24px; font-size: 14px; }
     .btn-large { padding: 14px 28px; font-size: 16px; }
     .section-title { font-size: 28px; }
