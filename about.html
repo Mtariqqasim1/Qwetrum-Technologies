@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="About Qwetrum Technologies - Our story, mission, values and leadership team.">
+    <title>About Us — Qwetrum Technologies</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ── PAGE HERO ── */
+        .page-hero {
+            min-height: 42vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 20px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero__bg { position: absolute; inset: 0; z-index: 0; }
+        .page-hero__content { position: relative; z-index: 1; }
+        .page-hero h1 {
+            font-size: clamp(36px, 6vw, 68px);
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+        .page-hero p {
+            font-size: clamp(16px, 2vw, 20px);
+            color: rgba(255,255,255,0.7);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* ── STORY SECTION ── */
+        .about-story {
+            padding: 80px 0;
+        }
+        .about-story__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .about-story__text h2 {
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .about-story__text p {
+            font-size: 17px;
+            color: rgba(255,255,255,0.72);
+            line-height: 1.85;
+            margin-bottom: 16px;
+        }
+        .about-story__visual {
+            background: var(--card-bg);
+            border-radius: 28px;
+            border: 1px solid rgba(77,212,212,0.15);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .stat-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .stat-box {
+            background: rgba(77,212,212,0.05);
+            border: 1px solid rgba(77,212,212,0.15);
+            border-radius: 18px;
+            padding: 28px 20px;
+            text-align: center;
+        }
+        .stat-box .number {
+            font-size: 42px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .stat-box .label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.55);
+            font-weight: 500;
+        }
+
+        /* ── MISSION & VALUES ── */
+        .about-values {
+            padding: 80px 0;
+            text-align: center;
+        }
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 50px;
+        }
+        .value-card {
+            background: var(--card-bg);
+            border-radius: 22px;
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 36px 28px;
+            text-align: left;
+            transition: var(--transition);
+        }
+        .value-card:hover {
+            border-color: rgba(77,212,212,0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(77,212,212,0.1);
+        }
+        .value-icon {
+            font-size: 36px;
+            margin-bottom: 18px;
+            display: block;
+        }
+        .value-card h3 {
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .value-card p {
+            font-size: 15px;
+            color: rgba(255,255,255,0.62);
+            line-height: 1.7;
+        }
+
+        /* ── TEAM SECTION ── */
+        .about-team {
+            padding: 80px 0 100px;
+            text-align: center;
+        }
+
+        /* ── CTA ── */
+        .about-cta {
+            margin-top: 80px;
+            background: linear-gradient(135deg, rgba(77,212,212,0.08), rgba(16,168,79,0.05));
+            border: 1px solid rgba(77,212,212,0.2);
+            border-radius: 28px;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        .about-cta h2 {
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 800;
+            margin-bottom: 14px;
+        }
+        .about-cta p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 36px;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .about-story__grid { grid-template-columns: 1fr; gap: 40px; }
+            .values-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 560px) {
+            .values-grid { grid-template-columns: 1fr; }
+            .about-cta { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="nav-curved">
+                <div class="nav__logo">
+                    <div class="logo-text">
+                        <img src="Assests/logo.png" alt="Qwetrum Technologies" class="nav-logo-img" style="height:200px;">
+                    </div>
+                </div>
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="index.html#home" class="nav__link">Home</a></li>
+                        <li class="nav__item"><a href="about.html" class="nav__link active">About</a></li>
+                        <li class="nav__item"><a href="index.html#projects" class="nav__link">Projects</a></li>
+                        <li class="nav__item"><a href="services.html" class="nav__link">Services</a></li>
+                        <li class="nav__item"><a href="index.html#testimonials" class="nav__link">Testimonials</a></li>
+                        <li class="nav__item"><a href="index.html#team" class="nav__link">Team</a></li>
+                        <li class="nav__item"><a href="#" class="nav__link" onclick="openContactModal();return false;">Contact</a></li>
+                    </ul>
+                    <a href="#" class="btn btn-outline nav__cta" onclick="openContactModal();return false;">Get Started</a>
+                </div>
+                <div class="nav__toggle" id="nav-toggle">
+                    <span></span><span></span><span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="page-hero__bg">
+            <div class="bg-circle bg-circle-1"></div>
+            <div class="bg-circle bg-circle-2"></div>
+        </div>
+        <div class="page-hero__content container">
+            <span class="tag">Who We Are</span>
+            <h1>About <span class="text-gradient">Qwetrum</span></h1>
+            <p>We are a team of passionate builders, designers, and marketers united by one mission — to help businesses grow through technology.</p>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section class="about-story">
+        <div class="container">
+            <div class="about-story__grid">
+                <div class="about-story__text">
+                    <span class="tag">Our Story</span>
+                    <h2>Built to Help <span class="text-gradient">Businesses Succeed</span></h2>
+                    <p>Qwetrum Technologies was founded with a single purpose: to bridge the gap between powerful technology and real business growth. We saw too many businesses struggling with outdated systems and ineffective digital strategies — so we set out to change that.</p>
+                    <p>Today, we are a full-service digital agency delivering custom software, e-commerce solutions, and results-driven digital marketing to businesses across industries. From startups to established enterprises, we bring the same dedication to every project.</p>
+                    <p>We don't just build products — we build partnerships. Every client is treated as a long-term collaborator, and every solution is designed with your business goals at the center.</p>
+                </div>
+                <div class="about-story__visual">
+                    <div class="stat-row">
+                        <div class="stat-box">
+                            <span class="number">100+</span>
+                            <span class="label">Projects Delivered</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="number">50+</span>
+                            <span class="label">Happy Clients</span>
+                        </div>
+                    </div>
+                    <div class="stat-row">
+                        <div class="stat-box">
+                            <span class="number">5+</span>
+                            <span class="label">Industries Served</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="number">3+</span>
+                            <span class="label">Years of Experience</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Values -->
+    <section class="about-values">
+        <div class="container">
+            <span class="tag">Our Values</span>
+            <h2 class="section-title">What Drives <span class="text-gradient">Everything We Do</span></h2>
+            <p class="section-description">Our core values are not just words on a wall — they shape every decision, every line of code, and every client interaction.</p>
+            <div class="values-grid">
+                <div class="value-card">
+                    <span class="value-icon">🎯</span>
+                    <h3>Results-Driven</h3>
+                    <p>Every solution we build is tied to your business objectives. We measure success by the results we deliver, not just the features we ship.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-icon">🤝</span>
+                    <h3>True Partnership</h3>
+                    <p>We work alongside our clients as a dedicated partner — transparent, honest, and always aligned with your vision and long-term success.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-icon">⚡</span>
+                    <h3>Innovation First</h3>
+                    <p>We stay ahead of the curve by continuously learning and adopting the latest technologies to deliver cutting-edge solutions.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-icon">🔒</span>
+                    <h3>Quality & Security</h3>
+                    <p>We never compromise on quality. Every product is rigorously tested, secure, and built to perform reliably under real-world conditions.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-icon">💡</span>
+                    <h3>Creative Thinking</h3>
+                    <p>We bring fresh ideas and creative problem-solving to every challenge, crafting unique solutions that stand out in the market.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-icon">🚀</span>
+                    <h3>Fast Execution</h3>
+                    <p>We believe speed matters. Our agile processes allow us to deliver high-quality work quickly without sacrificing attention to detail.</p>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="about-cta">
+                <h2>Ready to Work With <span class="text-gradient">Our Team?</span></h2>
+                <p>Let's talk about your project and see how we can help you grow.</p>
+                <a href="#" class="btn btn-primary btn-large" onclick="openContactModal();return false;">
+                    Get a Free Consultation
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <div class="footer__glow"></div>
+        <div class="container">
+            <div class="footer__main">
+                <div class="footer__brand">
+                    <div class="footer__logo-row">
+                        <svg width="42" height="42" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                            <circle cx="40" cy="40" r="40" fill="url(#fg2)"/>
+                            <text x="50%" y="57%" text-anchor="middle" fill="white" font-size="40" font-weight="bold" font-family="Inter,sans-serif">Q</text>
+                            <defs>
+                                <linearGradient id="fg2" x1="0" y1="0" x2="80" y2="80">
+                                    <stop stop-color="#41ebaa"/><stop offset="1" stop-color="#10a84f"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="footer__logo-text">
+                            <span class="footer__brand-name">Qwetrum</span>
+                            <span class="footer__brand-sub">Technologies Pvt Ltd</span>
+                        </div>
+                    </div>
+                    <p class="footer__desc">One team to build, convert, and grow your digital presence.</p>
+                    <div class="footer__socials">
+                        <a href="https://www.linkedin.com/company/qwetrum-technologies/" class="footer__social-icon" aria-label="LinkedIn">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </a>
+                        <a href="https://www.facebook.com/share/18fjqTEg9R/" class="footer__social-icon" aria-label="Facebook">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/qwetrumtechnologies?igsh=d2Iwd3U5dmx2bzJz" class="footer__social-icon" aria-label="Instagram">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer__col">
+                    <h4>Software</h4>
+                    <ul>
+                        <li><a href="services.html">Web Design &amp; Development</a></li>
+                        <li><a href="services.html">Landing Pages Design</a></li>
+                        <li><a href="services.html">POS Software Development</a></li>
+                        <li><a href="services.html">Healthcare &amp; HIPAA Apps</a></li>
+                        <li><a href="services.html">E-commerce Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4>Digital Marketing</h4>
+                    <ul>
+                        <li><a href="services.html">SEO Services</a></li>
+                        <li><a href="services.html">Social Media Marketing</a></li>
+                        <li><a href="services.html">Content Marketing</a></li>
+                        <li><a href="services.html">PPC Advertising</a></li>
+                        <li><a href="services.html">Email Marketing</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="terms.html">Terms &amp; Conditions</a></li>
+                        <li><a href="index.html#team">Our Team</a></li>
+                        <li><a href="#" onclick="openContactModal();return false;">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__divider"></div>
+            <div class="footer__bottom">
+                <p class="footer__copy">&copy; 2026 Qwetrum Technologies Pvt Ltd. All rights reserved.</p>
+                <div class="footer__bottom-links">
+                    <a href="terms.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Contact Modal -->
+    <div class="contact-modal" id="contact-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">&times;</button>
+            <h2>Get a Free Consultation</h2>
+            <form class="contact-form" id="qwetrum-contact-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <input type="tel" name="phone" placeholder="Phone Number">
+                <textarea name="message" placeholder="Tell us about your project" rows="5" required></textarea>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // ── Google Apps Script Contact Form Handler ──
+        const APPS_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL"; // ← Paste your deployed URL here
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('#qwetrum-contact-form').forEach(form => {
+                form.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    const btn = form.querySelector('button[type="submit"]');
+                    const orig = btn.innerHTML;
+                    btn.innerHTML = '<span style="opacity:0.8">Sending...</span>';
+                    btn.disabled = true;
+
+                    const payload = {
+                        name:    form.name.value.trim(),
+                        email:   form.email.value.trim(),
+                        phone:   form.phone ? form.phone.value.trim() : '',
+                        message: form.message.value.trim()
+                    };
+
+                    try {
+                        await fetch(APPS_SCRIPT_URL, {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        btn.innerHTML = '✓ Message Sent!';
+                        btn.style.background = 'linear-gradient(135deg,#41ebaa,#10a84f)';
+                        form.reset();
+                        setTimeout(() => {
+                            window.closeContactModal && window.closeContactModal();
+                            btn.innerHTML = orig;
+                            btn.style.background = '';
+                            btn.disabled = false;
+                        }, 2500);
+                    } catch {
+                        btn.innerHTML = '✗ Error — Try Again';
+                        btn.style.background = 'rgba(255,60,60,0.7)';
+                        setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.disabled = false; }, 2500);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="script.js"></script>
+    <script>
+        var APPS_SCRIPT_URL = "TUMHARA_APPS_SCRIPT_URL_YAHAN";
+        document.addEventListener("DOMContentLoaded", function() {
+            var form = document.querySelector(".contact-form");
+            if (!form) return;
+            form.addEventListener("submit", async function(e) {
+                e.preventDefault();
+                var btn = form.querySelector('button[type="submit"]');
+                var orig = btn.textContent;
+                btn.textContent = "Sending...";
+                btn.disabled = true;
+                var payload = {
+                    name:    form.querySelector('[name="name"]').value,
+                    email:   form.querySelector('[name="email"]').value,
+                    phone:   (form.querySelector('[name="phone"]') || {}).value || "",
+                    message: form.querySelector('[name="message"]').value
+                };
+                try {
+                    await fetch(APPS_SCRIPT_URL, {
+                        method: "POST", mode: "no-cors",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(payload)
+                    });
+                    btn.textContent = "\u2713 Message Sent!";
+                    btn.style.background = "linear-gradient(135deg,#41ebaa,#10a84f)";
+                    form.reset();
+                    setTimeout(function() {
+                        window.closeContactModal && window.closeContactModal();
+                        btn.textContent = orig;
+                        btn.style.background = "";
+                        btn.disabled = false;
+                    }, 2500);
+                } catch(err) {
+                    btn.textContent = "Error \u2014 Try Again";
+                    btn.disabled = false;
+                }
+            }, true);
+        });
+    </script>
+</body>
+</html>

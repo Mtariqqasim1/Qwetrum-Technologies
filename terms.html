@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Qwetrum Technologies - Terms and Conditions, Privacy Policy.">
+    <title>Terms & Conditions — Qwetrum Technologies</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ── PAGE HERO ── */
+        .page-hero {
+            min-height: 36vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 20px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero__bg { position: absolute; inset: 0; z-index: 0; }
+        .page-hero__content { position: relative; z-index: 1; }
+        .page-hero h1 {
+            font-size: clamp(32px, 5vw, 58px);
+            font-weight: 900;
+            margin-bottom: 16px;
+        }
+        .page-hero p {
+            font-size: 16px;
+            color: rgba(255,255,255,0.55);
+        }
+
+        /* ── TERMS CONTENT ── */
+        .terms-section {
+            padding: 60px 0 100px;
+        }
+        .terms-wrapper {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+        .terms-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.07);
+            padding: 52px 56px;
+            margin-bottom: 24px;
+        }
+        .terms-card h2 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            color: var(--primary-cyan);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .terms-card h2 .num {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-teal));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: #000;
+            flex-shrink: 0;
+        }
+        .terms-card p {
+            font-size: 15.5px;
+            color: rgba(255,255,255,0.68);
+            line-height: 1.85;
+            margin-bottom: 14px;
+        }
+        .terms-card p:last-child { margin-bottom: 0; }
+        .terms-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .terms-card ul li {
+            font-size: 15px;
+            color: rgba(255,255,255,0.65);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.7;
+        }
+        .terms-card ul li::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--primary-cyan);
+            flex-shrink: 0;
+            margin-top: 7px;
+        }
+        .terms-card a {
+            color: var(--primary-cyan);
+            text-decoration: underline;
+        }
+        .terms-meta {
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255,255,255,0.35);
+            margin-bottom: 48px;
+        }
+
+        @media (max-width: 680px) {
+            .terms-card { padding: 32px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="nav-curved">
+                <div class="nav__logo">
+                    <div class="logo-text">
+                        <img src="Assests/logo.png" alt="Qwetrum Technologies" class="nav-logo-img" style="height:200px;">
+                    </div>
+                </div>
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="index.html#home" class="nav__link">Home</a></li>
+                        <li class="nav__item"><a href="about.html" class="nav__link">About</a></li>
+                        <li class="nav__item"><a href="index.html#projects" class="nav__link">Projects</a></li>
+                        <li class="nav__item"><a href="services.html" class="nav__link">Services</a></li>
+                        <li class="nav__item"><a href="index.html#testimonials" class="nav__link">Testimonials</a></li>
+                        <li class="nav__item"><a href="index.html#team" class="nav__link">Team</a></li>
+                        <li class="nav__item"><a href="#" class="nav__link" onclick="openContactModal();return false;">Contact</a></li>
+                    </ul>
+                    <a href="#" class="btn btn-outline nav__cta" onclick="openContactModal();return false;">Get Started</a>
+                </div>
+                <div class="nav__toggle" id="nav-toggle">
+                    <span></span><span></span><span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="page-hero__bg">
+            <div class="bg-circle bg-circle-1"></div>
+            <div class="bg-circle bg-circle-2"></div>
+        </div>
+        <div class="page-hero__content container">
+            <span class="tag">Legal</span>
+            <h1>Terms & <span class="text-gradient">Conditions</span></h1>
+            <p>Last updated: March 2026</p>
+        </div>
+    </section>
+
+    <!-- Terms Content -->
+    <section class="terms-section">
+        <div class="container">
+            <div class="terms-wrapper">
+
+                <p class="terms-meta">Please read these Terms and Conditions carefully before using our services. By accessing or using Qwetrum Technologies' services, you agree to be bound by these terms.</p>
+
+                <div class="terms-card">
+                    <h2><span class="num">1</span> Acceptance of Terms</h2>
+                    <p>By accessing our website at <a href="https://qwetrumtechnologies.com">qwetrumtechnologies.com</a> or engaging our services, you confirm that you have read, understood, and agree to be bound by these Terms and Conditions and our Privacy Policy.</p>
+                    <p>If you do not agree to these terms, please do not use our website or services. Qwetrum Technologies reserves the right to update these terms at any time, and continued use of our services constitutes acceptance of any changes.</p>
+                </div>
+
+                <div class="terms-card">
+                    <h2><span class="num">2</span> Services Provided</h2>
+                    <p>Qwetrum Technologies provides a range of digital services including but not limited to:</p>
+                    <ul>
+                        <li>Custom web design and development</li>
+                        <li>E-commerce solutions (Shopify, WooCommerce, custom builds)</li>
+                        <li>Landing page design and optimization</li>
+                        <li>POS software development</li>
+                        <li>Healthcare and HIPAA-compliant application development</li>
+                        <li>Digital marketing including SEO, social media, email marketing, and PPC</li>
+                        <li>Data analytics and business intelligence dashboards</li>
+                    </ul>
+                    <p>Specific deliverables, timelines, and pricing are defined in individual project agreements or proposals provided to each client.</p>
+                </div>
+
+                <div class="terms-card">
+                    <h2><span class="num">3</span> Client Responsibilities</h2>
+                    <p>As a client, you agree to:</p>
+                    <ul>
+                        <li>Provide accurate and complete information required for project delivery</li>
+                        <li>Provide timely feedback and approvals to avoid project delays</li>
+                        <li>Ensure that all content, images, and materials provided to us are legally owned by you or properly licensed</li>
+                        <li>Make payments according to the agreed payment schedule</li>
+                        <li>Not use our services for any illegal, harmful, or unethical purposes</li>
+                    </ul>
+                </div>
+
+                <div class="terms-card">
+                    <h2><span class="num">4</span> Payments & Refunds</h2>
+                    <p>All service fees are outlined in the project proposal or contract. Standard payment terms are:</p>
+                    <ul>
+                        <li>50% upfront deposit required before work begins</li>
+                        <li>Remaining balance due upon project completion before final delivery</li>
+                        <li>Monthly retainer services are billed in advance</li>
+                    </ul>
+                    <p>Refunds are considered on a case-by-case basis. If Qwetrum Technologies is unable to deliver the agreed services, a proportional refund will be issued. No refunds are provided for completed and delivered work.</p>
+                    <p>Late payments may incur a 2% monthly fee. Qwetrum Technologies reserves the right to pause work on accounts with outstanding balances.</p>
+                </div>
+
+                <div class="terms-card">
+                    <h2><span class="num">5</span> Intellectual Property</h2>
+                    <p>Upon receipt of full payment, clients receive full ownership of the final deliverables created specifically for their project, including website code, design assets, and content.</p>
+                    <p>Qwetrum Technologies retains the right to:</p>
+                    <ul>
+                        <li>Display completed work in our portfolio and marketing materials</li>
+                        <li>Use proprietary frameworks, tools, and libraries developed internally</li>
+                        <li>Retain ownership of any third-party components used (licensed separately)</li>
+                    </ul>
+                    <p>All pre-existing intellectual property, including our tools, methodologies, and code libraries, remains the sole property of Qwetrum Technologies.</p>
+                </div>
+
+                <div class="terms-card">
+                    <h2><span class="num">6</span> Confidentiality</h2>
+                    <p>Qwetrum Technologies treats all client information, business data, and project details with strict confidentiality. We will not share, sell, or disclose your information to any third party without your explicit consent, except as required by law.</p>
+                    <p>We may require clients to sign a Non-Disclosure Agreement (NDA) for sensitive projects upon request.</p>
+                </div>
+
+                <div class="terms-card">
+                    <h2><span class="num">7</span> Privacy Policy</h2>
+                    <p>We are committed to protecting your personal information. When you contact us or use our services, we may collect:</p>
+                    <ul>
+                        <li>Name, email address, and phone number</li>
+                        <li>Business name and project details</li>
+                        <li>Website usage data via cookies and analytics tools</li>
+                    </ul>
+                    <p>This information is used solely to provide and improve our services. We do not sell your personal data to third parties. You may request deletion of your data at any time by contacting us at <a href="/cdn-cgi/l/email-protection#40292e262f003137253432352d342523282e2f2c2f272925336e232f2d"><span class="__cf_email__" data-cfemail="bed7d0d8d1fecfc9dbcacccbd3cadbddd6d0d1d2d1d9d7dbcd90ddd1d3">[email&#160;protected]</span></a>.</p>
+                    <p>Our website uses cookies to enhance your browsing experience. You may disable cookies in your browser settings, though this may affect some functionality.</p>
+                </div>
+
+                <div class="terms-card">
+                    <h2><span class="num">8</span> Limitation of Liability</h2>
+                    <p>Qwetrum Technologies is not liable for any indirect, incidental, or consequential damages arising from the use of our services, including but not limited to loss of revenue, data, or business opportunity.</p>
+                    <p>Our total liability to any client shall not exceed the total amount paid by that client in the three months preceding the claim.</p>
+                </div>
+
+                <div class="terms-card">
+                    <h2><span class="num">9</span> Termination</h2>
+                    <p>Either party may terminate a project agreement with 14 days written notice. Upon termination:</p>
+                    <ul>
+                        <li>Client is responsible for payment of all work completed to date</li>
+                        <li>Qwetrum Technologies will deliver all completed work and assets</li>
+                        <li>Any upfront deposits for unstarted work may be refunded at our discretion</li>
+                    </ul>
+                </div>
+
+                <div class="terms-card">
+                    <h2><span class="num">10</span> Contact Us</h2>
+                    <p>If you have any questions about these Terms and Conditions or our Privacy Policy, please contact us:</p>
+                    <ul>
+                        <li>Email: <a href="/cdn-cgi/l/email-protection#5a33343c351a2b2d3f2e282f372e3f3932343536353d333f2974393537"><span class="__cf_email__" data-cfemail="3851565e5778494f5d4c4a4d554c5d5b50565754575f515d4b165b5755">[email&#160;protected]</span></a></li>
+                        <li>LinkedIn: <a href="https://www.linkedin.com/company/qwetrum-technologies/" target="_blank">Qwetrum Technologies</a></li>
+                        <li>Instagram: <a href="https://www.instagram.com/qwetrumtechnologies" target="_blank">@qwetrumtechnologies</a></li>
+                    </ul>
+                    <p>We aim to respond to all inquiries within 1–2 business days.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <div class="footer__glow"></div>
+        <div class="container">
+            <div class="footer__main">
+                <div class="footer__brand">
+                    <div class="footer__logo-row">
+                        <svg width="42" height="42" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                            <circle cx="40" cy="40" r="40" fill="url(#fg3)"/>
+                            <text x="50%" y="57%" text-anchor="middle" fill="white" font-size="40" font-weight="bold" font-family="Inter,sans-serif">Q</text>
+                            <defs>
+                                <linearGradient id="fg3" x1="0" y1="0" x2="80" y2="80">
+                                    <stop stop-color="#41ebaa"/><stop offset="1" stop-color="#10a84f"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="footer__logo-text">
+                            <span class="footer__brand-name">Qwetrum</span>
+                            <span class="footer__brand-sub">Technologies Pvt Ltd</span>
+                        </div>
+                    </div>
+                    <p class="footer__desc">One team to build, convert, and grow your digital presence.</p>
+                    <div class="footer__socials">
+                        <a href="https://www.linkedin.com/company/qwetrum-technologies/" class="footer__social-icon" aria-label="LinkedIn">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </a>
+                        <a href="https://www.facebook.com/share/18fjqTEg9R/" class="footer__social-icon" aria-label="Facebook">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/qwetrumtechnologies?igsh=d2Iwd3U5dmx2bzJz" class="footer__social-icon" aria-label="Instagram">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer__col">
+                    <h4>Software</h4>
+                    <ul>
+                        <li><a href="services.html">Web Design &amp; Development</a></li>
+                        <li><a href="services.html">Landing Pages Design</a></li>
+                        <li><a href="services.html">POS Software Development</a></li>
+                        <li><a href="services.html">Healthcare &amp; HIPAA Apps</a></li>
+                        <li><a href="services.html">E-commerce Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4>Digital Marketing</h4>
+                    <ul>
+                        <li><a href="services.html">SEO Services</a></li>
+                        <li><a href="services.html">Social Media Marketing</a></li>
+                        <li><a href="services.html">Content Marketing</a></li>
+                        <li><a href="services.html">PPC Advertising</a></li>
+                        <li><a href="services.html">Email Marketing</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="terms.html">Terms &amp; Conditions</a></li>
+                        <li><a href="index.html#team">Our Team</a></li>
+                        <li><a href="#" onclick="openContactModal();return false;">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__divider"></div>
+            <div class="footer__bottom">
+                <p class="footer__copy">&copy; 2026 Qwetrum Technologies Pvt Ltd. All rights reserved.</p>
+                <div class="footer__bottom-links">
+                    <a href="terms.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Contact Modal -->
+    <div class="contact-modal" id="contact-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">&times;</button>
+            <h2>Get a Free Consultation</h2>
+            <form class="contact-form" id="qwetrum-contact-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <input type="tel" name="phone" placeholder="Phone 
