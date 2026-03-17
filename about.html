@@ -398,7 +398,7 @@
 
     <script>
         // ── Google Apps Script Contact Form Handler ──
-        const APPS_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL"; // ← Paste your deployed URL here
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwf1ucMqrEkfTjlPyvCbIugn8BCzMmo9FciP3sgvM87hF_ZQpSKM0KMBCedcqA5PpuarQ/exec"; // ← Paste your deployed URL here
 
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('#qwetrum-contact-form').forEach(form => {
@@ -442,44 +442,6 @@
         });
     </script>
     <script src="script.js"></script>
-    <script>
-        var APPS_SCRIPT_URL = "TUMHARA_APPS_SCRIPT_URL_YAHAN";
-        document.addEventListener("DOMContentLoaded", function() {
-            var form = document.querySelector(".contact-form");
-            if (!form) return;
-            form.addEventListener("submit", async function(e) {
-                e.preventDefault();
-                var btn = form.querySelector('button[type="submit"]');
-                var orig = btn.textContent;
-                btn.textContent = "Sending...";
-                btn.disabled = true;
-                var payload = {
-                    name:    form.querySelector('[name="name"]').value,
-                    email:   form.querySelector('[name="email"]').value,
-                    phone:   (form.querySelector('[name="phone"]') || {}).value || "",
-                    message: form.querySelector('[name="message"]').value
-                };
-                try {
-                    await fetch(APPS_SCRIPT_URL, {
-                        method: "POST", mode: "no-cors",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(payload)
-                    });
-                    btn.textContent = "\u2713 Message Sent!";
-                    btn.style.background = "linear-gradient(135deg,#41ebaa,#10a84f)";
-                    form.reset();
-                    setTimeout(function() {
-                        window.closeContactModal && window.closeContactModal();
-                        btn.textContent = orig;
-                        btn.style.background = "";
-                        btn.disabled = false;
-                    }, 2500);
-                } catch(err) {
-                    btn.textContent = "Error \u2014 Try Again";
-                    btn.disabled = false;
-                }
-            }, true);
-        });
-    </script>
+    
 </body>
 </html>
