@@ -598,6 +598,70 @@ body {
     transform: translateY(-8px);
 }
 
+/* Clickable project card (anchor tag) */
+a.project-card--link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+a.project-card--link:hover .btn-arrow svg {
+    color: var(--primary-cyan);
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
+/* View All Projects button */
+.projects__view-all {
+    margin-top: 56px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 40px;
+    background: transparent;
+    border: 2px solid var(--primary-cyan);
+    color: var(--primary-cyan);
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 50px;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-view-all::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--primary-cyan), var(--primary-teal));
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    z-index: 0;
+}
+
+.btn-view-all:hover::before { opacity: 1; }
+
+.btn-view-all:hover {
+    color: #000;
+    box-shadow: 0 0 32px rgba(65, 235, 170, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-view-all svg {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.btn-view-all:hover svg { transform: translateX(4px); }
+
 .project-card__image {
     padding: 0;
     background: linear-gradient(135deg, #1a2035 0%, #0f1425 100%);
