@@ -330,7 +330,6 @@
                         </span>
                     </div>
                 </a>
-
                 <a href="https://github.com/Waleed-Altaf/Tech-Layoffs-Analysis-SQL-PowerBI" class="project-card project-card--link" target="_blank" rel="noopener">
                     <div class="project-card__image">
                         <div class="img-slider" data-current="0">
@@ -568,7 +567,7 @@
     </section>
 
     <!-- Team Section -->
-    <section class="team" id="team">
+    <!-- <section class="team" id="team">
         <div class="container">
             <span class="tag">The People Behind Qwetrum</span>
             <h2 class="section-title">
@@ -607,7 +606,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Footer -->
     <footer class="footer" id="services">
@@ -742,20 +741,20 @@
                     btn.innerHTML = '<span style="opacity:0.8">Sending...</span>';
                     btn.disabled = true;
 
-                    const payload = {
-                        name:    form.name.value.trim(),
-                        email:   form.email.value.trim(),
-                        phone:   form.phone ? form.phone.value.trim() : '',
-                        message: form.message.value.trim()
-                    };
+                    const payload = new URLSearchParams({
+    name:    form.elements['name'].value.trim(),
+    email:   form.elements['email'].value.trim(),
+    phone:   form.elements['phone'] ? form.elements['phone'].value.trim() : '',
+    message: form.elements['message'].value.trim()
+});
 
-                    try {
-                        await fetch(APPS_SCRIPT_URL, {
-                            method: 'POST',
-                            mode: 'no-cors',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload)
-                        });
+try {
+    await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: payload.toString()
+    });
                         // no-cors means we won't get a readable response — assume success
                         btn.innerHTML = '✓ Message Sent!';
                         btn.style.background = 'linear-gradient(135deg,#41ebaa,#10a84f)';
