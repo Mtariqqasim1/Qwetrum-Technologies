@@ -3,11 +3,19 @@ function doPost(e) {
   var RECIPIENT_EMAIL = "TUMHARI_GMAIL@gmail.com"; // ← Yahan apni email likho
 
   // ── Parse form data ──────────────────────────────────────────
-  var data = JSON.parse(e.postData.contents);
-  var name    = data.name    || "N/A";
-  var email   = data.email   || "N/A";
-  var phone   = data.phone   || "Not provided";
-  var message = data.message || "N/A";
+  var name, email, phone, message;
+  try {
+    var data = JSON.parse(e.postData.contents);
+    name    = data.name    || "N/A";
+    email   = data.email   || "N/A";
+    phone   = data.phone   || "Not provided";
+    message = data.message || "N/A";
+  } catch(err) {
+    name    = e.parameter.name    || "N/A";
+    email   = e.parameter.email   || "N/A";
+    phone   = e.parameter.phone   || "Not provided";
+    message = e.parameter.message || "N/A";
+  }
   var time    = new Date().toLocaleString("en-PK", { timeZone: "Asia/Karachi" });
 
   // ── Professional HTML Email Template ────────────────────────

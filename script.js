@@ -124,12 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape' && contactModal?.classList.contains('active')) closeContactModal();
     });
 
-    contactForm?.addEventListener('submit', e => {
-        e.preventDefault();
-        alert('Thank you! We will get back to you soon.');
-        contactForm.reset();
-        closeContactModal();
-    });
+    // Form submission is handled by the Google Apps Script handler in index.html
 
     /* ── SCROLL ANIMATIONS (fade-in) ────────────────────────── */
     const fadeObserver = new IntersectionObserver((entries) => {

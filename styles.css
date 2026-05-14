@@ -206,8 +206,8 @@ body {
 }
 
 .header.scrolled .nav-curved {
-    background: rgba(10, 15, 30, 0.95);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+    background: rgb(3, 7, 0);
+    box-shadow: 0 8px 20px rgba(16, 211, 58, 0.4);
     border-color: rgba(77, 212, 212, 0.2);
 }
 
