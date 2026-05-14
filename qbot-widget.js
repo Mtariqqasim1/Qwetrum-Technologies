@@ -12,7 +12,7 @@
 (function () {
   // ─── CONFIG (aap sirf ye change karein) ─────────────────────────────────────
   const CONFIG = {
-    apiKey: "AIzaSyDAcDBWvV2dqW2xluLdfSCHe0PXJKYlp2Q",           // ← Yahan apni key daalo
+    apiKey: "AIzaSyCj3u3R_WjOE1mhAP4m-fFHEaYow_CYdiM",           // ← Yahan apni key daalo
     accentColor: "#41ebaa",
     bgColor: "#0A0F1E",
     websiteUrl: "https://www.qwetrumtechnologies.tech",
@@ -33,11 +33,12 @@ TIMELINES: Landing page 3–5d | Website 1–2wk | E-commerce 2–6wk | Custom a
 ROLE: Be warm, professional, consultative. Ask about industry, pain points, goals, budget, timeline. Suggest specific services. Keep responses under 120 words. Use short bullets. Encourage free consultation booking. Never give firm pricing.`;
 
   const QUICK = [
-    "What services do you offer?",
-    "I need an e-commerce website",
-    "Tell me about n8n automation",
-    "Do you build healthcare apps?",
-    "How much does a website cost?",
+    "💼 Get a Free Consultation",
+    "🛒 I need an E-commerce Store",
+    "🤖 What is n8n Automation?",
+    "💊 Healthcare & HIPAA Apps",
+    "📈 SEO & Digital Marketing",
+    "🖥️ Custom Software / POS",
   ];
 
   // ─── STATE ───────────────────────────────────────────────────────────────────
@@ -50,6 +51,11 @@ ROLE: Be warm, professional, consultative. Ask about industry, pain points, goal
 
   // ─── CSS ─────────────────────────────────────────────────────────────────────
   const css = `
+#qbot-tooltip{position:fixed;bottom:92px;right:24px;background:linear-gradient(135deg,#0d3320,#0F1425);border:1px solid rgba(65,235,170,0.35);color:#41ebaa;font-size:12px;font-weight:600;padding:8px 14px;border-radius:12px 12px 4px 12px;white-space:nowrap;z-index:99997;box-shadow:0 4px 20px rgba(65,235,170,0.2);animation:qbTooltipBounce 3s ease-in-out infinite;font-family:'Segoe UI',system-ui,sans-serif;pointer-events:none;display:flex;align-items:center;gap:6px;}
+#qbot-tooltip::after{content:'';position:absolute;bottom:-6px;right:18px;width:10px;height:10px;background:linear-gradient(135deg,#0d3320,#0F1425);border-right:1px solid rgba(65,235,170,0.35);border-bottom:1px solid rgba(65,235,170,0.35);transform:rotate(45deg);}
+#qbot-tooltip .qbot-tlp-dot{width:7px;height:7px;border-radius:50%;background:#41ebaa;animation:qbBlink 1.1s ease-in-out infinite;}
+@keyframes qbTooltipBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+@keyframes qbBlink{0%,100%{opacity:1;box-shadow:0 0 6px #41ebaa;}50%{opacity:0.2;box-shadow:none;}}
 #qbot-fab{position:fixed;bottom:24px;right:24px;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#10a84f,#41ebaa);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:99998;box-shadow:0 4px 24px rgba(65,235,170,0.45);transition:transform 0.25s cubic-bezier(.175,.885,.32,1.275),box-shadow 0.25s;}
 #qbot-fab:hover{transform:scale(1.12);box-shadow:0 8px 36px rgba(65,235,170,0.6);}
 #qbot-fab::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(65,235,170,0.35);animation:qbPulse 2.5s ease-in-out infinite;}
@@ -95,6 +101,11 @@ ROLE: Be warm, professional, consultative. Ask about industry, pain points, goal
   // ─── HTML ─────────────────────────────────────────────────────────────────────
   const root = document.createElement("div");
   root.innerHTML = `
+  <!-- Tooltip bubble -->
+  <div id="qbot-tooltip">
+    <span class="qbot-tlp-dot"></span> How can we help you today?
+  </div>
+
   <!-- FAB button -->
   <button id="qbot-fab" aria-label="Chat with QBot">
     <svg id="qbot-icon-open" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M12 2v3"/><circle cx="12" cy="2" r="1" fill="#fff" stroke="none"/><line x1="8" y1="2" x2="8" y2="5"/><line x1="16" y1="2" x2="16" y2="5"/><circle cx="8.5" cy="13" r="1.5" fill="#fff" stroke="none"/><circle cx="15.5" cy="13" r="1.5" fill="#fff" stroke="none"/><path d="M9 17h6"/></svg>
@@ -117,7 +128,6 @@ ROLE: Be warm, professional, consultative. Ask about industry, pain points, goal
           </div>
         </div>
       </div>
-      <a href="${CONFIG.websiteUrl}" target="_blank" style="font-size:11px;color:#41ebaa;text-decoration:none;padding:3px 9px;border:1px solid rgba(65,235,170,0.3);border-radius:14px;">Visit Site</a>
     </div>
 
     <!-- Messages -->
@@ -155,9 +165,11 @@ ROLE: Be warm, professional, consultative. Ask about industry, pain points, goal
     const panel = document.getElementById("qbot-panel");
     const iconOpen = document.getElementById("qbot-icon-open");
     const iconClose = document.getElementById("qbot-icon-close");
+    const tooltip = document.getElementById("qbot-tooltip");
     panel.classList.toggle("open", open);
     iconOpen.style.display = open ? "none" : "block";
     iconClose.style.display = open ? "block" : "none";
+    if (tooltip) tooltip.style.display = open ? "none" : "flex";
   }
 
   function updateBtn() {
@@ -266,7 +278,7 @@ ROLE: Be warm, professional, consultative. Ask about industry, pain points, goal
       streamText(id, reply, maybeShowCTA);
     } catch (e) {
       removeTyping();
-      const errMsg = CONFIG.apiKey === "AIzaSyDAcDBWvV2dqW2xluLdfSCHe0PXJKYlp2Q"
+      const errMsg = CONFIG.apiKey === "AIzaSyCj3u3R_WjOE1mhAP4m-fFHEaYow_CYdiM"
         ? "⚠️ API key nahi lagi — qbot-widget.js mein YOUR_GEMINI_API_KEY replace karein."
         : "Connection issue — please try again.";
       addMsg("assistant", errMsg);
