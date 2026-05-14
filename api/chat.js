@@ -24,7 +24,7 @@ export default async function handler(req, res) {
     }
 
     // API key Vercel Environment Variable se aati hai — kabhi expose nahi hoti
-    const apiKey = process.env.GEMINI_API_KEY;
+    const apiKey = process.env.gemini_api_key;
 
     if (!apiKey) {
       return res.status(500).json({ error: "API key not configured" });
