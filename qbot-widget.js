@@ -12,7 +12,6 @@
 (function () {
   // ─── CONFIG (aap sirf ye change karein) ─────────────────────────────────────
   const CONFIG = {
-    apiKey: "AIzaSyCj3u3R_WjOE1mhAP4m-fFHEaYow_CYdiM",           // ← Yahan apni key daalo
     accentColor: "#41ebaa",
     bgColor: "#0A0F1E",
     websiteUrl: "https://www.qwetrumtechnologies.tech",
@@ -232,25 +231,17 @@ ROLE: Be warm, professional, consultative. Ask about industry, pain points, goal
     el.innerHTML = `<button onclick="if(typeof window.openContactModal==='function'){window.openContactModal();}else{window.location.hash='contact';}" style="width:100%;display:flex;align-items:center;justify-content:center;gap:7px;padding:10px;background:linear-gradient(135deg,#10a84f,#41ebaa);border-radius:11px;color:#fff;font-size:12px;font-weight:600;text-decoration:none;font-family:inherit;border:none;cursor:pointer;">📅 Book Free Consultation — Get a Custom Quote</button>`;
   }
 
-  // ─── GEMINI API ───────────────────────────────────────────────────────────────
+  // ─── GEMINI API — Secure Proxy ───────────────────────────────────────────────
   async function callGemini(messages) {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${CONFIG.apiKey}`;
-    const contents = messages.map(m => ({
-      role: m.role === "assistant" ? "model" : "user",
-      parts: [{ text: m.content }],
-    }));
-    const res = await fetch(url, {
+    // API key ab server pe hai — frontend mein nahi
+    const res = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        system_instruction: { parts: [{ text: SYSTEM }] },
-        contents,
-        generationConfig: { maxOutputTokens: 800, temperature: 0.75 },
-      }),
+      body: JSON.stringify({ messages, system: SYSTEM }),
     });
     const data = await res.json();
-    if (data.error) throw new Error(data.error.message);
-    return data.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, please try again.";
+    if (data.error) throw new Error(data.error);
+    return data.reply || "Sorry, please try again.";
   }
 
   // ─── CHAT LOGIC ───────────────────────────────────────────────────────────────
@@ -278,7 +269,7 @@ ROLE: Be warm, professional, consultative. Ask about industry, pain points, goal
       streamText(id, reply, maybeShowCTA);
     } catch (e) {
       removeTyping();
-      const errMsg = CONFIG.apiKey === "AIzaSyCj3u3R_WjOE1mhAP4m-fFHEaYow_CYdiM"
+      const errMsg = CONFIG.apiKey === "AIzaSyCh3DD5-Vbhcdpse2bejEeWQdPXnnHnifk"
         ? "⚠️ API key nahi lagi — qbot-widget.js mein YOUR_GEMINI_API_KEY replace karein."
         : "Connection issue — please try again.";
       addMsg("assistant", errMsg);
