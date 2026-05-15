@@ -1,16 +1,10 @@
 /**
  * QBot — Qwetrum Technologies AI Business Agent
- * Free floating chat widget using Google Gemini API
- *
- * SETUP (3 steps):
- * 1. Get FREE API key from https://aistudio.google.com/apikey
- * 2. Replace YOUR_GEMINI_API_KEY below with your key
- * 3. Paste this before </body> in your website:
- *    <script src="qbot-widget.js"></script>
+ * Secure version — API key is hidden on server (Vercel proxy)
  */
 
 (function () {
-  // ─── CONFIG (aap sirf ye change karein) ─────────────────────────────────────
+  // ─── CONFIG ──────────────────────────────────────────────────────────────────
   const CONFIG = {
     accentColor: "#41ebaa",
     bgColor: "#0A0F1E",
@@ -89,7 +83,7 @@ ROLE: Be warm, professional, consultative. Ask about industry, pain points, goal
 @keyframes qbFadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @keyframes qbSpin{to{transform:rotate(360deg)}}
 @keyframes qbPulse{0%,100%{opacity:0.5;transform:scale(1)}50%{opacity:0;transform:scale(1.35)}}
-@media(max-width:480px){#qbot-panel{width:calc(100vw - 16px);right:8px;bottom:82px;max-height:calc(100vh - 100px);height:auto;}}
+@media(max-width:480px){#qbot-tooltip{right:12px;bottom:88px;}#qbot-panel{width:calc(100vw - 16px);right:8px;bottom:82px;max-height:calc(100vh - 100px);height:auto;}#qbot-fab{bottom:16px;right:12px;}}
 `;
 
   // ─── INJECT CSS ───────────────────────────────────────────────────────────────
@@ -100,22 +94,17 @@ ROLE: Be warm, professional, consultative. Ask about industry, pain points, goal
   // ─── HTML ─────────────────────────────────────────────────────────────────────
   const root = document.createElement("div");
   root.innerHTML = `
-  <!-- Tooltip bubble -->
   <div id="qbot-tooltip">
     <span class="qbot-tlp-dot"></span> How can we help you today?
   </div>
 
-  <!-- FAB button -->
   <button id="qbot-fab" aria-label="Chat with QBot">
     <svg id="qbot-icon-open" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M12 2v3"/><circle cx="12" cy="2" r="1" fill="#fff" stroke="none"/><line x1="8" y1="2" x2="8" y2="5"/><line x1="16" y1="2" x2="16" y2="5"/><circle cx="8.5" cy="13" r="1.5" fill="#fff" stroke="none"/><circle cx="15.5" cy="13" r="1.5" fill="#fff" stroke="none"/><path d="M9 17h6"/></svg>
     <svg id="qbot-icon-close" style="display:none" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
   </button>
 
-  <!-- Chat panel -->
   <div id="qbot-panel">
     <div id="qbot-grid"></div>
-
-    <!-- Header -->
     <div id="qbot-hdr">
       <div style="display:flex;align-items:center;gap:10px;">
         <div style="width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#0d3320,#10a84f);border:1.5px solid rgba(65,235,170,0.3);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#41ebaa;font-family:monospace;">Q</div>
@@ -127,37 +116,43 @@ ROLE: Be warm, professional, consultative. Ask about industry, pain points, goal
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- Messages -->
-    <div id="qbot-msgs"></div>
-
-    <!-- Quick chips -->
-    <div id="qbot-chips"></div>
-
-    <!-- CTA -->
-    <div id="qbot-cta"></div>
-
-    <!-- Input -->
-    <div id="qbot-inp-area">
-      <textarea id="qbot-textarea" placeholder="Ask about services, timelines, automation…" rows="1"></textarea>
-      <button id="qbot-sendbtn" aria-label="Send">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      <button onclick="toggleQBot()" style="background:none;border:none;cursor:pointer;color:#64748b;padding:4px;display:flex;align-items:center;justify-content:center;border-radius:6px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
-
-    <!-- Footer tags -->
-    <div id="qbot-footer">
-      ${["Web Dev","E-commerce","POS","n8n Automation","SEO","Healthcare"].map(s =>
-        `<span style="font-size:9px;color:#2d5a3d;padding:2px 7px;border:1px solid rgba(65,235,170,0.15);border-radius:8px;">${s}</span>`
-      ).join("")}
+    <div id="qbot-msgs"></div>
+    <div id="qbot-chips"></div>
+    <div id="qbot-cta"></div>
+    <div id="qbot-inp-area">
+      <textarea id="qbot-textarea" rows="1" placeholder="Ask about services, timelines, automation..."></textarea>
+      <button id="qbot-sendbtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
     </div>
-  </div>`;
+    <div id="qbot-footer">
+      <span style="font-size:10px;color:#2d5a3d;">Powered by</span>
+      <span style="font-size:10px;color:#41ebaa;font-weight:600;">Qwetrum AI</span>
+    </div>
+  </div>
+  `;
   document.body.appendChild(root);
 
-  // ─── HELPERS ──────────────────────────────────────────────────────────────────
-  function esc(t) { return t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
-  function scrollBot() { const m = document.getElementById("qbot-msgs"); if(m) m.scrollTop = m.scrollHeight; }
+  // ─── HELPERS ─────────────────────────────────────────────────────────────────
+  function scrollBot() {
+    const c = document.getElementById("qbot-msgs");
+    if (c) c.scrollTop = c.scrollHeight;
+  }
+
+  function updateBtn() {
+    const ta = document.getElementById("qbot-textarea");
+    const btn = document.getElementById("qbot-sendbtn");
+    if (!btn) return;
+    const hasText = ta && ta.value.trim().length > 0;
+    btn.style.background = hasText && !loading ? "linear-gradient(135deg,#10a84f,#41ebaa)" : "rgba(65,235,170,0.08)";
+    btn.style.color = hasText && !loading ? "#fff" : "rgba(65,235,170,0.3)";
+    btn.style.cursor = hasText && !loading ? "pointer" : "not-allowed";
+    btn.style.border = hasText && !loading ? "none" : "1px solid rgba(65,235,170,0.25)";
+  }
 
   function togglePanel() {
     open = !open;
@@ -171,24 +166,17 @@ ROLE: Be warm, professional, consultative. Ask about industry, pain points, goal
     if (tooltip) tooltip.style.display = open ? "none" : "flex";
   }
 
-  function updateBtn() {
-    const ta = document.getElementById("qbot-textarea");
-    const btn = document.getElementById("qbot-sendbtn");
-    const active = !loading && ta && ta.value.trim();
-    btn.style.background = active ? "linear-gradient(135deg,#0e7490,#0891b2)" : "rgba(6,182,212,0.1)";
-    btn.style.color = active ? "#fff" : "rgba(6,182,212,0.3)";
-    btn.style.cursor = active ? "pointer" : "not-allowed";
-  }
+  window.toggleQBot = togglePanel;
 
-  function addMsg(role, text, streaming) {
+  let msgId = 0;
+  function addMsg(role, text, stream) {
+    const id = "qm" + (++msgId);
     const container = document.getElementById("qbot-msgs");
-    const id = "qm" + Date.now();
-    const isUser = role === "user";
     const div = document.createElement("div");
-    div.id = id;
-    div.className = "qbot-bubble" + (isUser ? " user" : "");
-    div.innerHTML = (!isUser ? `<div class="qbot-av">Q</div>` : "") +
-      `<div id="${id}-b" class="qbot-bub ${isUser?"user":"bot"}">${streaming ? "" : esc(text)}</div>`;
+    div.className = "qbot-bubble" + (role === "user" ? " user" : "");
+    div.innerHTML = role === "user"
+      ? `<div class="qbot-bub user">${text.replace(/\n/g,"<br>")}</div>`
+      : `<div class="qbot-av">Q</div><div id="${id}-b" class="qbot-bub bot">${stream ? "" : text.replace(/\n/g,"<br>")}</div>`;
     container.appendChild(div);
     scrollBot();
     return id;
@@ -228,12 +216,11 @@ ROLE: Be warm, professional, consultative. Ask about industry, pain points, goal
     ctaDone = true;
     const el = document.getElementById("qbot-cta");
     el.style.display = "block";
-    el.innerHTML = `<button onclick="if(typeof window.openContactModal==='function'){window.openContactModal();}else{window.location.hash='contact';}" style="width:100%;display:flex;align-items:center;justify-content:center;gap:7px;padding:10px;background:linear-gradient(135deg,#10a84f,#41ebaa);border-radius:11px;color:#fff;font-size:12px;font-weight:600;text-decoration:none;font-family:inherit;border:none;cursor:pointer;">📅 Book Free Consultation — Get a Custom Quote</button>`;
+    el.innerHTML = `<button onclick="if(typeof window.openContactModal==='function'){window.openContactModal();}else{window.location.hash='contact';}" style="width:100%;display:flex;align-items:center;justify-content:center;gap:7px;padding:10px;background:linear-gradient(135deg,#10a84f,#41ebaa);border-radius:11px;color:#fff;font-size:12px;font-weight:600;font-family:inherit;border:none;cursor:pointer;">📅 Book Free Consultation — Get a Custom Quote</button>`;
   }
 
-  // ─── GEMINI API — Secure Proxy ───────────────────────────────────────────────
+  // ─── SECURE API CALL — Vercel Proxy ──────────────────────────────────────────
   async function callGemini(messages) {
-    // API key ab server pe hai — frontend mein nahi
     const res = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -269,10 +256,7 @@ ROLE: Be warm, professional, consultative. Ask about industry, pain points, goal
       streamText(id, reply, maybeShowCTA);
     } catch (e) {
       removeTyping();
-      const errMsg = CONFIG.apiKey === "AIzaSyCh3DD5-Vbhcdpse2bejEeWQdPXnnHnifk"
-        ? "⚠️ API key nahi lagi — qbot-widget.js mein YOUR_GEMINI_API_KEY replace karein."
-        : "Connection issue — please try again.";
-      addMsg("assistant", errMsg);
+      addMsg("assistant", "Connection issue — please try again.");
     }
     loading = false;
     updateBtn();
@@ -280,24 +264,18 @@ ROLE: Be warm, professional, consultative. Ask about industry, pain points, goal
 
   // ─── INIT ─────────────────────────────────────────────────────────────────────
   function init() {
-    // Welcome message
     const welcome = "Hi! I'm QBot 👋 — Qwetrum Technologies' AI assistant.\n\nI help you explore our services, scope your project, and connect with the right team.\n\nWhat are you looking to build today?";
     msgs.push({ role: "assistant", content: welcome });
     addMsg("assistant", welcome);
 
-    // Quick chips
     const chips = document.getElementById("qbot-chips");
     chips.innerHTML = QUICK.map(q =>
       `<button class="qbot-chip" onclick="(function(){document.querySelector('#qbot-chips').style.display='none';})();window._qbotSend('${q.replace(/'/g,"&#39;")}')">${q}</button>`
     ).join("");
 
-    // Expose send for chip onclick
     window._qbotSend = sendChat;
-
-    // FAB toggle
     document.getElementById("qbot-fab").addEventListener("click", togglePanel);
 
-    // Textarea
     const ta = document.getElementById("qbot-textarea");
     ta.addEventListener("input", function () {
       this.style.height = "auto";
@@ -308,7 +286,6 @@ ROLE: Be warm, professional, consultative. Ask about industry, pain points, goal
       if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendChat(); }
     });
 
-    // Send button
     document.getElementById("qbot-sendbtn").addEventListener("click", sendChat);
   }
 
