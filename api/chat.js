@@ -2,8 +2,8 @@
 // API key yahan server pe safe rehti hai, frontend ko kabhi nahi milti
 
 export default async function handler(req, res) {
-  // CORS headers — sirf aapki website se requests allow karo
-  res.setHeader("Access-Control-Allow-Origin", "https://www.qwetrumtechnologies.tech");
+  // CORS — sab devices allow (mobile + desktop + all browsers)
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
@@ -23,7 +23,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Invalid request" });
     }
 
-    // API key Vercel Environment Variable se aati hai — kabhi expose nahi hoti
+    // Vercel Environment Variable — aapne jo naam rakha tha
     const apiKey = process.env.gemini_api_key;
 
     if (!apiKey) {
