@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QBot API Test</title>
+  <style>
+    body { font-family: monospace; background: #0a0f1e; color: #41ebaa; padding: 20px; font-size: 14px; }
+    button { background: #10a84f; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-size: 16px; cursor: pointer; margin: 10px 0; width: 100%; }
+    #log { background: #0f1425; border: 1px solid #41ebaa33; border-radius: 8px; padding: 16px; margin-top: 16px; white-space: pre-wrap; min-height: 200px; word-break: break-all; }
+    .ok { color: #4ade80; }
+    .err { color: #f87171; }
+    .info { color: #60a5fa; }
+  </style>
+</head>
+<body>
+  <h2>🔍 QBot API Debug</h2>
+  <button onclick="runTest()">Test /api/chat</button>
+  <div id="log">Test nahi chala abhi...</div>
+
+  <script>
+    function log(msg, type='info') {
+      const el = document.getElementById('log');
+      const time = new Date().toLocaleTimeString();
+      el.innerHTML += `\n[${time}] <span class="${type}">${msg}</span>`;
+    }
+
+    async function runTest() {
+      document.getElementById('log').innerHTML = '';
+      log('Test shuru...', 'info');
+      log('URL: ' + window.location.href, 'info');
+      log('Browser: ' + navigator.userAgent.substring(0, 80), 'info');
+
+      try {
+        log('→ /api/chat ko call kar raha hoon...', 'info');
+
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            messages: [{ role: 'user', content: 'Hello, say hi in 5 words.' }],
+            system: 'You are a helpful assistant. Keep responses very short.'
+          })
+        });
+
+        log('HTTP Status: ' + res.status + ' ' + res.statusText, res.ok ? 'ok' : 'err');
+
+        const text = await res.text();
+        log('Raw response: ' + text.substring(0, 500), 'info');
+
+        try {
+          const json = JSON.parse(text);
+          if (json.reply) {
+            log('✅ SUCCESS! Reply: ' + json.reply, 'ok');
+          } else if (json.error) {
+            log('❌ API Error: ' + json.error, 'err');
+          }
+        } catch(e) {
+          log('❌ JSON parse error: ' + e.message, 'err');
+        }
+
+      } catch(err) {
+        log('❌ Fetch failed: ' + err.message, 'err');
+        log('Yeh CORS ya network issue hai', 'err');
+      }
+    }
+  </script>
+</body>
+</html>
