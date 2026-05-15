@@ -274,7 +274,11 @@ ROLE: Be warm, professional, consultative. Ask about industry, pain points, goal
     ).join("");
 
     window._qbotSend = sendChat;
-    document.getElementById("qbot-fab").addEventListener("click", togglePanel);
+
+    // FAB — click + touch for mobile
+    const fab = document.getElementById("qbot-fab");
+    fab.addEventListener("click", togglePanel);
+    fab.addEventListener("touchend", function(e) { e.preventDefault(); togglePanel(); });
 
     const ta = document.getElementById("qbot-textarea");
     ta.addEventListener("input", function () {
@@ -286,7 +290,10 @@ ROLE: Be warm, professional, consultative. Ask about industry, pain points, goal
       if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendChat(); }
     });
 
-    document.getElementById("qbot-sendbtn").addEventListener("click", sendChat);
+    // Send button — click + touch for mobile
+    const sendBtn = document.getElementById("qbot-sendbtn");
+    sendBtn.addEventListener("click", sendChat);
+    sendBtn.addEventListener("touchend", function(e) { e.preventDefault(); sendChat(); });
   }
 
   if (document.readyState === "loading") {
